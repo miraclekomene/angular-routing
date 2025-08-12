@@ -1,0 +1,63 @@
+<section id="tasks">
+  <header>
+    <h2>{{ userName() }} Tasks</h2>
+    <!-- <h2>{{ userName }} Tasks</h2> -->
+    <!-- <h2>{{ userName() }} Tasks</h2> -->
+    <!-- <h2>USERS Tasks</h2> -->
+    <menu>
+      <a routerLink="tasks/new">Add Task</a>
+    </menu>
+  </header>
+
+  <!-- <p>Todo ...</p> -->
+  <router-outlet />
+</section>
+
+
+<!-- ---------- Extracting Dynamic Route Parameters via @Input() -----------
+You don't have to extract dynamic route parameters via signal-based inputs - you can also use @Input()-based inputs!
+
+To do this, you can define the input like this:
+
+@Input({required: true}) userId!: string;
+You can then use this input in any way needed - for example inside of a getter function.
+
+If you want to run some code whenever the input value changes, you can also define an extra setter function that contains the to-be-executed code. Like this:
+
+@Input()
+set userId(uid: string) {
+  console.log(uid);
+} -->
+
+
+
+<!-- -------------- Optional: Class-based Resolvers -------------------
+In the previous lecture, you learned how to define route data resolvers as functions. This is the modern, recommended approach.
+
+But you can also define resolvers as classes - like this:
+
+@Injectable({ providedIn: 'root' })
+export class UserNameResolver implements Resolve<string> {
+  constructor(private usersService: UsersService) {}
+  resolve(activatedRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    const userName =
+      this.usersService.users.find(
+        (u) => u.id === activatedRoute.paramMap.get('userId')
+      )?.name || '';
+    return userName;
+  }
+}
+The resolve class is then assigned to a route like this:
+
+{
+  path: 'users/:userId', // <your-domain>/users/<uid>
+  component: UserTasksComponent,
+  children: userRoutes,
+  data: {
+    message: 'Hello!',
+  },
+  resolve: {
+    userName: UserNameResolver,
+  },
+}
+Please note that this approach is deprecated though - the modern, function-based one (shown in the previous lecture) is therefore recommended! -->

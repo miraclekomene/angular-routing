@@ -1,0 +1,9 @@
+<div>
+  <!-- <a href="/tasks"> (not recommended)-->
+  <!-- <a routerLink="/tasks" routerLinkActive="selected"> -->
+  <!-- <a [routerLink]="'/users/' + user().id" routerLinkActive="selected"> -->
+  <a [routerLink]="['/users/' + user().id, 'tasks']" routerLinkActive="selected">
+    <img [src]="imagePath()" [alt]="user().name" />
+    <span>{{ user().name }}</span>
+  </a>
+</div>
